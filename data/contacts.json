@@ -1,0 +1,16 @@
+[
+  {
+    "full_name": "John Doe",
+    "phone_number": "555-555-5555",
+    "email": "john@email.com",
+    "tags": "Friend",
+    "id": 1
+  },
+  {
+    "full_name": "Jane Doe",
+    "phone_number": "444-444-4444",
+    "email": "jane@email.com",
+    "tags": "Work",
+    "id": 2
+  }
+]

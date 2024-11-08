@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My Contact Manager</title>
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+  <script src="/javascripts/jquery.js"></script>
+  <script src="/javascripts/handlebars.js"></script>
+  <script type="module" src="/javascripts/app.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Contact Manager</h1>
+  </header>
+  <section id="controls">
+    <input class="add_contact" type="button" value="Add Contact">
+    <div id="tags_container">
+      <label for="tag_menu">Tags:</label>
+      <select name="tags" id="tag_menu">
+        <option value="All" selected>All</option>
+      </select>
+    </div>
+    <input id="search" type="search" placeholder="Search by Name"> 
+  </section>
+  <section id="form_container" class="hide modal">
+    <form method="post" data-id="" novalidate>
+      <fieldset>
+        <label>Full Name:</label>
+        <input type="text" name="full_name" class="data">
+        <div id="full_name_error" class="hide error">Please enter a valid name</div>
+      </fieldset>
+      <fieldset>
+        <label>Email:</label>
+        <input type="email" name="email" class="data" placeholder="email@example.com">
+        <div id="email_error" class="hide error">Please enter a valid email address</div>
+      </fieldset>
+      <fieldset>
+        <label>Phone:</label>
+        <input type="phone" name="phone_number" class="data" placeholder="###-###-###">
+        <div id="phone_number_error" class="hide error">Please enter a valid phone number</div>
+      </fieldset>
+      <fieldset>
+        <label>Tags:</label>
+        <input type="text" name="tags" placeholder="Enter a comma-separated list">
+      </fieldset>
+      <fieldset class="form_buttons">
+        <input id="submit" type="submit" value="Submit">
+        <input id="cancel" type="reset" value="Cancel">
+      </fieldset>
+    </form>
+  </section>
+  <main id="contacts_container">
+    <div id="no_contacts" class="show">
+      <p>There are no contacts yet.</p>
+      <input class="add_contact" type="button" value="Add Contact">
+    </div>
+    <div id="no_matches" class="hide"></div>
+    <div id="contacts_list"></div>
+  </main>
+  <script id="contacts" type="text/x-handlebars">
+    {{#each contacts}}
+    {{> contact}}
+    {{/each}}
+  </script>
+
+  <script id="contact" type="text/x-handlebars" data-type="partial">
+    <div class="contact" data-id="{{id}}">
+      <h3 class="full_name">{{full_name}}</h3>
+      <dl>
+        <dt>Phone Number:</dt>
+        <dd class="phone_number">{{phone_number}}</dd>
+
+        <dt>Email:</dt>
+        <dd class="email">{{email}}</dd>
+
+        <dt>Tags:</dt>
+        <dd class="tags">{{tags}}</dd>
+      </dl>
+      <div>
+        <input class="edit_contact" type="button" value="Edit">
+        <input class="delete_contact" type="button" value="Delete">
+      </div>
+    </div>
+  </script>
+
+  <script id="options" type="text/x-handlebars">
+    {{#each options}}
+    {{> option}}
+    {{/each}}
+  </script>
+
+  <script id="option" type="text/x-handlebars" data-type="partial">
+    <option value="{{tag}}">{{tag}}</option>
+  </script>
+
+  <script id="form_title" type="text/x-handlebars">
+    <h3>{{form_title}}</h3>
+  </script>
+
+  <script id="no_matches_message" type="text/x-handlebars">
+    <p>There are no contacts that start with <span class="bold">{{query}}</span>.</p>
+  </script>
+
+</body>
+</html>
